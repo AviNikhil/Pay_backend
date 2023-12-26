@@ -1,0 +1,94 @@
+Table User:
+
+create table User(userid bigint AUTO_increment,
+firstname varchar(30),
+lastname char(30),
+email varchar(30),
+password varchar(30),
+mobileno bigint,
+address varchar(30),
+dob varchar(30),
+state varchar(30),
+pincode integer,
+PRIMARY KEY(userid)
+);
+
+Account Table
+
+create table Account(accountid bigint AUTO_increment primary key,
+fullname varchar(30),
+cardNo bigint,
+expirydate varchar(30),
+cvv integer,
+balance bigint,
+userid bigint,
+FOREIGN KEY (userid) references User(userid)
+);
+
+Transactions Table:
+
+create table Transactions(typeofTrans varchar(30),
+amount integer,
+username varchar(30),
+accountid bigint,
+billid integer,
+balance double,
+FOREIGN KEY (accountid) references Account(accountid));
+
+------------------------------------
+create table PastDetails(billid integer AUTO_increment primary key,
+accountid bigint,
+typeofTrans varchar(30),
+amount integer);
+--------------------------------
+
+if(this.state.user_id === '_add'){
+      return
+  }else{
+      ServiceComponent.getById(this.state.user_id).then( (res) =>{
+          let user = res.data;
+          this.setState({firstname: user.firstname,
+            lastname: user.lastname,
+            email : user.email ,password : user.password,
+            mobileno : user.mobileno,address : user.address,
+            dob : user.dob,state : user.state,
+            pincode : user.pincode
+          });
+      });
+  }    
+
+
+--------------------------------------------------------------------
+<div>
+    <Routes>
+        <Route path='/' element={<Login />} />
+        <Route path='/register' element={<Register/>} />
+        <Route path='/home' element={<Home/>} />
+        <Route path='/about' element={<About/>} />
+        <Route path='/mutual' element={<MutualFunds/>} />
+        <Route path='/bills' element={<Bills/>} />
+        <Route path='/transactiondetails' element={<TranactionDetails/>} />
+        <Route path='/deposite' element={<DepositeWithdraw/>} />
+        <Route path='/accountdetails' element={<AccountDetails/>} />
+        <Route path='/contact' element={<Contact/>} />
+        <Route path='/stocks' element={<Stocks/>} />
+    </Routes>
+    </div>
+
+------------------------------------------------
+insert into Account values(100025,
+'nikhil',
+987654321098,
+12/30,
+123,
+2000,
+111125);
+  
+------------------------------------------
+insert into Transactions values('Deposit,
+2000,
+'avinash',
+100025,
+111125,
+2000,
+);
